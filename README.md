@@ -41,7 +41,7 @@ Copy this link and open command prompt and switch to the location you want to sa
 ``` bash
 git remote add upstream https://github.com/prakhartiwari0/HTML-MarkDown-Converter.git
 git fetch upstream
-git pull upstream master
+git pull upstream <bracnh_name>
 ```
 5. Stage all the changes using ```git add .```
 
@@ -56,6 +56,8 @@ git pull upstream master
 9. Select the branch from forked repo you have contributed to and want to merge to the main repo and click **Create pull request** button.
 ![Selecting branch for pull request](img/select_branch.jpeg)
 
+10. You can also raise any new issue or work on existing issue.
+![Raising a issue](img/issue.jpeg)
 
 And bam!:fire: thats it.
 
