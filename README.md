@@ -26,6 +26,36 @@ After that, just follow the steps that program asks you to do.
 ## How to Contribute? 🤔
 It is very easy to contribute to this project, and it will be really helpful especially if you are a beginner in Python or just want to practice. 🔰
 
-Simply fork 🍴 this repository, and clone the fork to a separate directory in your computer system. Open the folder in your code editor. Read the code in `converter.py` and first try to understand what is going on. Now the main part, you can raise [issues](https://github.com/prakhartiwari0/HTML-MarkDown-Converter/issues) if you want to add a feature, or report a bug. Or you can simply work on the existing issues, but make sure to get assigned for them before starting to work on it.
+1. Fork this repo. You can fork the repo by clicking "fork" button on top-right corner.
+<p align="left"><img alt="forking" src="img/fork.jpeg"></p>
+
+2. Clone it on your local machine by simply clicking green "code" button and copying the given link.
+<p align="left"><img alt="forking" src="img/clone.jpeg"></p>
+
+Copy this link and open command prompt and switch to the location you want to save the project and run 
+```git clone <copied link here>```
+
+3. Add your changes or features.
+
+4. Before pushing the code run following command to avoid merge conflicts
+``` bash
+git remote add upstream https://github.com/prakhartiwari0/HTML-MarkDown-Converter.git
+git fetch upstream
+git pull upstream master
+```
+5. Stage all the changes using ```git add .```
+
+6. Add commit message ```git commit -m "<your message here>"``` and push the code using ```git push <remote name> <branch name>```
+
+7. Then go to the main repo from where the project is forked and go into **Pull Request** tab.
+<p align="left"><img alt="Pull Request creation" src="img/pr.jpeg"></p>
+
+8. Select the branch from forked repo you have contributed to and want to merge to the main repo.
+<p align="left"><img alt="Selecting branch for pull request" src="img/select_branch.jpeg"></p>
+
+9. Click create **Creating a pull request** and request for new PR.
+<p align="left"><img alt="forking" src="img/new_pr.jpeg"></p>
+
+And bam!:fire: thats it.
 
 Happy Contributing! 😇
