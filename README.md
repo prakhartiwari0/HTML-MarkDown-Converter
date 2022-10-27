@@ -16,7 +16,7 @@ $ python3 converter.py
 Or you can also use the Python IDLE, or any other code editor for this purpose.
 
 After that, just follow the steps the program asks you to do. 
-
+You will need to put the original code into an input.txt file created by the program, and then press ENTER. After that, the program will convert to your desired format, and put the converted code into output.txt file. 
 
 
 # How to Contribute? 🤔
