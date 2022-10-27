@@ -24,4 +24,4 @@ It is very easy to contribute to this project, and it will be really helpful esp
 
 Simply fork 🍴 this repository, and clone the fork to a separate directory in your computer system. Open the folder in your code editor. Read the code in `converter.py` and first try to understand what is going on. Now the main part, you can raise [issues](https://github.com/prakhartiwari0/HTML-MarkDown-Converter/issues) if you want to add a feature, or report a bug. Or you can simply work on the existing issues, but make sure to get assigned for them before starting to work on it.
 
-Happy Contributin! 😇
+Happy Contributing! 😇
