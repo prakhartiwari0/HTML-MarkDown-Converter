@@ -1,3 +1,4 @@
+import re
 which_to_which = input("Do you want to convert - \n 1.HTML to Markdown\n2.Markdown to HTML\n\nEnter 1 or 2: ")
 
 
@@ -5,13 +6,29 @@ which_to_which = input("Do you want to convert - \n 1.HTML to Markdown\n2.Markdo
 def htmltomd(source_code):
     # HEADINGS
     # <h1> to #
-    md_code = source_code.replace("<h1", "#")
-    md_code = md_code.replace("</h1>", "\n") # Remember to put md_code.replace() and not source_code.replace() to continue making changes to the modified code.
-    md_code = md_code.replace(">", " ")
+    heading_dict = {"<h1": "#",
+                    "<h2": "##", 
+                    "<h3": "###", 
+                    "<h4": "####", 
+                    "<h5": "#####",
+                    "<h6": "######"}
+    for key in heading_dict.keys():
+        if key in source_code:   
+            md_code = re.sub(key, heading_dict[key], source_code)
+
+    md_code = re.sub("</h[1-6]", "\n", md_code)
+    md_code = re.sub(">", " ", md_code)
+
+
+    # md_code = source_code.replace("<h1", "#")
+    # md_code = md_code.replace("</h[1-6]", "\n") 
+    # md_code = md_code.replace(">", " ")
 
     # LINKS
 
-
+    # Remember to put md_code.replace() 
+    # and not source_code.replace() to 
+    # continue making changes to the modified code.
     return md_code
 
 
