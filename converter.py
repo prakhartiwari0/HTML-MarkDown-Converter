@@ -37,17 +37,17 @@ def mdtohtml(source_code):
     return html_code
 
 
-
 if which_to_which == "1":
     # Create input.txt to take the raw code
-    file = open("input.txt", "w")
+    file = open(INUPT_FILE_NAME, "w")
     file.close()
 
-    # Asking to paste the raw code into input.txt 
-    pause = input("Kindly put the HTML code into input.txt, after that press ENTER ")
+    # Asking to paste the raw code into input.txt
+    pause = input(
+        "Kindly put the HTML code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file = open("input.txt", "r")
+    file = open(INUPT_FILE_NAME, "r")
     source_html = file.read()
     file.close()
 
@@ -55,20 +55,21 @@ if which_to_which == "1":
     converted_code = htmltomd(source_html)
 
     # Making output.txt and writing the converted code into it
-    file = open("output.txt", "w")
+    file = open(OUTPUT_FILE_NAME, "w")
     file.write(converted_code)
     file.close()
 
 elif which_to_which == "2":
     # Create input.txt to take the raw code
-    file = open("input.txt", "w")
+    file = open(INUPT_FILE_NAME, "w")
     file.close()
 
     # Asking to paste the raw code into input.txt
-    pause = input("Kindly put the Markdown code into input.txt, after that press ENTER ")
+    pause = input(
+        "Kindly put the Markdown code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file = open("input.txt", "r")
+    file = open(INUPT_FILE_NAME, "r")
     source_md = file.read()
     file.close()
 
@@ -76,5 +77,5 @@ elif which_to_which == "2":
     converted_code = mdtohtml(source_md)
 
     # Making output.txt and writing the converted code into it
-    file = open("output.txt", "w")
+    file = open(OUTPUT_FILE_NAME, "w")
     file.write(converted_code)
