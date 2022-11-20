@@ -56,17 +56,16 @@ if which_to_which == "1":
         "Kindly put the HTML code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file = open(INUPT_FILE_NAME, "r")
-    source_html = file.read()
-    file.close()
-
-    # Passing the raw code to the function
-    converted_code = htmltomd(source_html)
-
+    file1 = open(INUPT_FILE_NAME, "r")
     # Making output.txt and writing the converted code into it
-    file = open(OUTPUT_FILE_NAME, "w")
-    file.write(converted_code)
-    file.close()
+    file2 = open(OUTPUT_FILE_NAME, "w")
+
+    for line in file1.readlines():
+        # Passing the raw code to the function
+        file2.write(htmltomd(line))
+
+    file1.close()
+    file2.close()
 
 elif which_to_which == "2":
     # Create input.txt to take the raw code
@@ -78,13 +77,13 @@ elif which_to_which == "2":
         "Kindly put the Markdown code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file = open(INUPT_FILE_NAME, "r")
-    source_md = file.read()
-    file.close()
-
-    # Passing the raw code to the function
-    converted_code = mdtohtml(source_md)
-
+    file1 = open(INUPT_FILE_NAME, "r")
     # Making output.txt and writing the converted code into it
-    file = open(OUTPUT_FILE_NAME, "w")
-    file.write(converted_code)
+    file2 = open(OUTPUT_FILE_NAME, "w")
+
+    for line in file1.readlines():
+        # Passing the raw code to the function
+        file2.write(mdtohtml(line))
+
+    file1.close()
+    file2.close()
