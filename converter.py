@@ -30,7 +30,16 @@ def htmltomd(source_code):
 def mdtohtml(source_code):
     # HEADINGS
     # # to <h1>
-    html_code = "This part needs to be programmed"
+    # html_code = "This part needs to be programmed"
+
+    html_code = custom_make_translation(
+        source_code, {'#'*i: f'<h{i}>' for i in range(6, 0, -1)})
+
+    # if both old and new string are same then header is not there
+    if html_code != source_code:
+        # handles both '\n' and '\r\n\` cases
+        html_code = html_code.split('\n')[0]
+        html_code += f' </h{html_code[html_code.find("<h")+2]}> \n'
 
     # LINKS -> <a href=""> to [Name](URL)
 
