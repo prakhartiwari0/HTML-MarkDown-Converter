@@ -13,6 +13,17 @@ def custom_make_translation(txt, trans):
     return regex.sub(lambda match: trans[match.group(0)], txt)
 
 
+def html_to_markdown_custom(html):
+    trans = {}
+    anchors = re.findall(r'<a href="(.*?)">(.*?)</a>', html)
+    for anchor in anchors:
+        url = anchor[0]
+        text = anchor[1]
+        markdown_link = f"[{text}]({url})"
+        trans[f'<a href="{url}">{text}</a>'] = markdown_link
+    return custom_make_translation(html, trans)
+
+
 def htmltomd(source_code):
     # HEADINGS
     # <h1-6> to # - ######
@@ -23,6 +34,7 @@ def htmltomd(source_code):
         md_code, {f'</h{i}>': '\n' for i in range(1, 7)})
 
     # LINKS
+    md_code = html_to_markdown_custom(md_code)
 
     return md_code
 
@@ -42,7 +54,8 @@ def mdtohtml(source_code):
         html_code += f' </h{html_code[html_code.find("<h")+2]}> \n'
 
     # LINKS -> <a href=""> to [Name](URL)
-
+    html_code = re.sub(r'\[(.*?)\]\((.*?)\)',
+                       r'<a href="\2">\1</a>', source_code)
     return html_code
 
 
