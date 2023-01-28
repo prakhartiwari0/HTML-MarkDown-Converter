@@ -1,67 +1,27 @@
 import re
 
-INUPT_FILE_NAME = "input.txt"
+INPUT_FILE_NAME = "input.txt"
 OUTPUT_FILE_NAME = "output.txt"
 
-which_to_which = input(
-    "Do you want to convert - \n 1.HTML to Markdown\n2.Markdown to HTML\n\nEnter 1 or 2: ")
+def html_to_markdown(html):
+    # convert headings
+    html = re.sub(r"<h([1-6])>(.+?)</h[1-6]>", lambda m: "#" * int(m.group(1)) + " " + m.group(2), html)
+    # convert anchor tags
+    html = re.sub(r'<a href="(.+?)">(.+?)</a>', r"[\2](\1)", html)
+    return html
 
+def markdown_to_html(markdown):
+    # convert headings
+    markdown = re.sub(r"^(#+)(.+)$", lambda m: "<h" + str(len(m.group(1))) + ">" + m.group(2) + "</h" + str(len(m.group(1))) + ">", markdown, flags=re.MULTILINE)
+    # convert anchor tags
+    markdown = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', markdown)
+    return markdown
 
-def custom_make_translation(txt, trans):
-    # convert multiple string easily with dictionary
-    regex = re.compile('|'.join(map(re.escape, trans)))
-    return regex.sub(lambda match: trans[match.group(0)], txt)
-
-
-def html_to_markdown_custom(html):
-    trans = {}
-    anchors = re.findall(r'<a href="(.*?)">(.*?)</a>', html)
-    for anchor in anchors:
-        url = anchor[0]
-        text = anchor[1]
-        markdown_link = f"[{text}]({url})"
-        trans[f'<a href="{url}">{text}</a>'] = markdown_link
-    return custom_make_translation(html, trans)
-
-
-def htmltomd(source_code):
-    # HEADINGS
-    # <h1-6> to # - ######
-
-    md_code = custom_make_translation(
-        source_code, {f'<h{i}>': '#'*i + ' ' for i in range(1, 7)})
-    md_code = custom_make_translation(
-        md_code, {f'</h{i}>': '\n' for i in range(1, 7)})
-
-    # LINKS
-    md_code = html_to_markdown_custom(md_code)
-
-    return md_code
-
-
-def mdtohtml(source_code):
-    # HEADINGS
-    # # to <h1>
-    # html_code = "This part needs to be programmed"
-
-    html_code = custom_make_translation(
-        source_code, {'#'*i: f'<h{i}>' for i in range(6, 0, -1)})
-
-    # if both old and new string are same then header is not there
-    if html_code != source_code:
-        # handles both '\n' and '\r\n\` cases
-        html_code = html_code.split('\n')[0]
-        html_code += f' </h{html_code[html_code.find("<h")+2]}> \n'
-
-    # LINKS -> <a href=""> to [Name](URL)
-    html_code = re.sub(r'\[(.*?)\]\((.*?)\)',
-                       r'<a href="\2">\1</a>', source_code)
-    return html_code
-
+which_to_which = input("Do you want to convert?\n1. HTML to Markdown\n2. Markdown to HTML\nEnter 1 or 2: ")
 
 if which_to_which == "1":
     # Create input.txt to take the raw code
-    file = open(INUPT_FILE_NAME, "w")
+    file = open(INPUT_FILE_NAME, "w")
     file.close()
 
     # Asking to paste the raw code into input.txt
@@ -69,20 +29,20 @@ if which_to_which == "1":
         "Kindly put the HTML code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file1 = open(INUPT_FILE_NAME, "r")
+    file1 = open(INPUT_FILE_NAME, "r")
     # Making output.txt and writing the converted code into it
     file2 = open(OUTPUT_FILE_NAME, "w")
 
     for line in file1.readlines():
         # Passing the raw code to the function
-        file2.write(htmltomd(line))
+        file2.write(html_to_markdown(line))
 
     file1.close()
     file2.close()
 
 elif which_to_which == "2":
     # Create input.txt to take the raw code
-    file = open(INUPT_FILE_NAME, "w")
+    file = open(INPUT_FILE_NAME, "w")
     file.close()
 
     # Asking to paste the raw code into input.txt
@@ -90,13 +50,13 @@ elif which_to_which == "2":
         "Kindly put the Markdown code into input.txt, after that press ENTER ")
 
     # Reading the raw Code
-    file1 = open(INUPT_FILE_NAME, "r")
+    file1 = open(INPUT_FILE_NAME, "r")
     # Making output.txt and writing the converted code into it
     file2 = open(OUTPUT_FILE_NAME, "w")
 
     for line in file1.readlines():
         # Passing the raw code to the function
-        file2.write(mdtohtml(line))
+        file2.write(markdown_to_html(line))
 
     file1.close()
     file2.close()
